@@ -6,7 +6,7 @@ var wait = require('wait.for');
 
 var handlerFile = path.resolve(process.cwd() + '/index.js');
 var jouleFile = path.resolve(process.cwd() + '/../.joule.yml');
-var eventsFile = path.resolve(process.cwd() + '/../events.json');
+var eventsFile = path.resolve(process.cwd() + '/events.json');
 
 var context = {
   succeed: function(input) {
