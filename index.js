@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 var fs = require('fs');
 var path = require('path');
-var yaml = require('js-yaml');
+//var yaml = require('js-yaml');
 var wait = require('wait.for');
 
 var handlerFile = path.resolve(process.cwd() + '/index.js');
