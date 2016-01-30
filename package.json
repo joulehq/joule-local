@@ -1,5 +1,5 @@
 {
-  "name": "joule-local",
+  "name": "joule-node-local",
   "version": "0.0.3",
   "description": "Library to help run joules locally.",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/joulehq/joule-local.git"
+    "url": "git+https://github.com/joulehq/joule-node-local.git"
   },
   "keywords": [
     "joule"
@@ -16,9 +16,9 @@
   "author": "Jaisen Mathai",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/joulehq/joule-local/issues"
+    "url": "https://github.com/joulehq/joule-node-local/issues"
   },
-  "homepage": "https://github.com/joulehq/joule-local#readme",
+  "homepage": "https://github.com/joulehq/joule-node-local#readme",
   "dependencies": {
     "wait.for": "^0.6.6"
   }
