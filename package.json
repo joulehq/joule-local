@@ -1,6 +1,6 @@
 {
   "name": "joule-node-local",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Library to help run joules locally.",
   "main": "index.js",
   "scripts": {
