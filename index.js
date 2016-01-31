@@ -24,6 +24,15 @@ try {
   if(!events) {
     console.log('Unable to JSON parse ' + eventsFile + '.');
     return;
+  } else if(!events['events']) {
+    console.log('Unable to find `events[\'events\']` in events.json file.');
+    return;
+  }
+
+  if(typeof(events.env) === 'object') {
+    for(var envKey in events.env) {
+      process.env[envKey] = events.env[envKey];
+    }
   }
 } catch(e) {
   if (e.code == 'ENOENT') {
@@ -37,12 +46,17 @@ try {
 var init = function() {
 };
 
-var run = function(payload) {
+var run = function(method, payload) {
   var handler = require(handlerFile);
+  payload.httpMethod = method;
   wait.for(handler.handler, payload, context);
 };
 
 init();
-for(var i=0; i<events.length; i++) {
-  wait.launchFiber(run, events[i]);
+var i;
+var callEvents = events['events'];
+for(var method in callEvents) {
+  for(i=0; i<callEvents[method].length; i++) {
+    wait.launchFiber(run, method, callEvents[method][i]);
+  }
 }
