@@ -1,0 +1,16 @@
+{
+  "name": "tests",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "node ./node_modules/joule-node-local/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "joule-node-local": "0.0.5",
+    "joule-node-response": "0.0.4",
+    "js-yaml": "^3.5.3"
+  }
+}

@@ -1,6 +1,6 @@
 {
   "name": "joule-node-local",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Library to help run joules locally.",
   "main": "index.js",
   "scripts": {
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/joulehq/joule-node-local#readme",
   "dependencies": {
+    "js-yaml": "^3.5.3",
     "wait.for": "^0.6.6"
   }
 }

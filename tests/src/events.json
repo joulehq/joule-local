@@ -1,0 +1,26 @@
+{
+  "env": {
+    "FROM": "YOUR_TWILIO_NUMBER",
+    "TWILIO_ACCOUNT_SID": "YOUR_TWILIO_ACCOUNT_SID",
+    "TWILIO_AUTH_TOKEN": "YOUR_TWILIO_AUTH_TOKEN"
+  },
+  "events": {
+    "GET": {
+      "/": [
+        {"Body":"message"},
+        {"Body":""},
+        {}
+      ],
+      "/myParam": [
+        {"Body":"message"},
+        {"Body":""},
+        {}
+      ]
+    },
+    "DNE": {
+      "/": [
+        {}
+      ]
+    }
+  }
+}
