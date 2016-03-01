@@ -9,8 +9,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "joule-node-local": "0.0.5",
-    "joule-node-response": "0.0.4",
+    "joule-node-local": "<2.0.0",
+    "joule-node-response": "<2.0.0",
     "js-yaml": "^3.5.3"
   }
 }

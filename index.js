@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 var fs = require('fs');
 var path = require('path');
-//var yaml = require('js-yaml');
 var wait = require('wait.for');
+var yaml = require('js-yaml');
 
 var handlerFile = path.resolve(process.cwd() + '/index.js');
 var jouleFile = path.resolve(process.cwd() + '/../.joule.yml');
@@ -10,9 +10,6 @@ var eventsFile = path.resolve(process.cwd() + '/events.json');
 
 var context = {
   succeed: function(input) {
-    console.log(input);
-  },
-  fail: function(input) {
     console.log(input);
   }
 };
@@ -43,20 +40,65 @@ try {
   return;
 }
 
-var init = function() {
+try {
+  yaml = yaml.safeLoad(fs.readFileSync(jouleFile, 'utf8'));
+} catch(e) {
+  console.log(e);
+  return;
+}
+
+var mapRequestIntoPayload = function(method, path, payload) {
+  var apiPath = ''
+      , apiQuery = ''
+      , apiQueryAsObject = {}
+      , pathAsArray
+      , returnedPayload = {httpMethod: method};
+
+  // check if path has a ?
+  if(path.indexOf('?') === -1) {
+    apiPath = path.substr(0, path.indexOf('?'));
+  } else {
+    apiPath = path;
+    apiQuery = path.substr(path.indexOf('?')+1);
+    var tmp1 = apiQuery.split('&')
+        , tmp1parts;
+    for(var tmp1cnt=0; tmp1cnt<tmp1.length; tmp1cnt++) {
+      tmp1parts = tmp1[tmp1cnt].split('=');
+      apiQueryAsObject[tmp1parts[0]] = tmp1parts[1];
+    }
+  }
+
+  if(method === 'POST') {
+    returnedPayload['post'] = payload;
+  } else if(method === 'GET') {
+    for (var attrname in payload) { apiQueryAsObject[attrname] = payload[attrname]; }
+  }
+
+  pathAsArray = apiPath.split('/').slice(3);
+
+  returnedPayload['path'] = pathAsArray;
+  returnedPayload['query'] = apiQueryAsObject;
+  return returnedPayload;
 };
 
-var run = function(method, payload) {
-  var handler = require(handlerFile);
-  payload.httpMethod = method;
-  wait.for(handler.handler, payload, context);
+var run = function(method, path, payload) {
+  var handler = require(handlerFile), mappedPayload;
+  console.log('');
+  console.log(method + ' ' + path + ' ' + JSON.stringify(payload));
+  try {
+    payload = mapRequestIntoPayload(method, path, payload);
+    wait.for(handler.handler, payload, context);
+  } catch(e) {
+    console.log('FAILURE: ' + e.message);
+  }
 };
 
-init();
 var i;
 var callEvents = events['events'];
 for(var method in callEvents) {
-  for(i=0; i<callEvents[method].length; i++) {
-    wait.launchFiber(run, method, callEvents[method][i]);
+  for(var path in callEvents[method]) {
+    for(var i=0; i<callEvents[method][path].length; i++) {
+      wait.launchFiber(run, method, path, callEvents[method][path][i]);
+    }
   }
 }

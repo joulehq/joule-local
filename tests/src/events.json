@@ -6,20 +6,25 @@
   },
   "events": {
     "GET": {
-      "/": [
+      "/username/joule": [
         {"Body":"message"},
         {"Body":""},
         {}
       ],
-      "/myParam": [
-        {"Body":"message"},
-        {"Body":""},
+      "/username/joule/myParam": [
+        {}
+      ],
+      "/username/joule?name1=value1&name2=value2": [
         {}
       ]
     },
-    "DNE": {
-      "/": [
+    "POST": {
+      "/username/joule": [
+        {"Body":"message"},
         {}
+      ],
+      "/username/joule?name1=value1": [
+        {"Body":"message"}
       ]
     }
   }
