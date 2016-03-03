@@ -56,9 +56,9 @@ var mapRequestIntoPayload = function(method, path, payload) {
 
   // check if path has a ?
   if(path.indexOf('?') === -1) {
-    apiPath = path.substr(0, path.indexOf('?'));
-  } else {
     apiPath = path;
+  } else {
+    apiPath = path.substr(0, path.indexOf('?'));
     apiQuery = path.substr(path.indexOf('?')+1);
     var tmp1 = apiQuery.split('&')
         , tmp1parts;
