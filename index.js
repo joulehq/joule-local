@@ -83,8 +83,6 @@ var mapRequestIntoPayload = function(method, path, payload) {
 
 var run = function(method, path, payload) {
   var handler = require(handlerFile), mappedPayload;
-  console.log('');
-  console.log(method + ' ' + path + ' ' + JSON.stringify(payload));
   try {
     payload = mapRequestIntoPayload(method, path, payload);
     wait.for(handler.handler, payload, context);
