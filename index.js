@@ -88,6 +88,7 @@ var run = function(method, path, payload) {
     wait.for(handler.handler, payload, context);
   } catch(e) {
     console.log('FAILURE: ' + e.message);
+    console.log(e.stack);
   }
 };
 
