@@ -68,7 +68,7 @@ var mapRequestIntoPayload = function(method, path, payload) {
     }
   }
 
-  if(method === 'POST') {
+  if(method === 'POST' || method === 'PUT') {
     returnedPayload['post'] = payload;
   } else if(method === 'GET') {
     for (var attrname in payload) { apiQueryAsObject[attrname] = payload[attrname]; }
