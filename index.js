@@ -74,7 +74,11 @@ var mapRequestIntoPayload = function(method, path, payload) {
     for (var attrname in payload) { apiQueryAsObject[attrname] = payload[attrname]; }
   }
 
-  pathAsArray = apiPath.split('/').slice(3);
+  if(apiPath === '/') {
+    pathAsArray = [];
+  } else {
+    pathAsArray = apiPath.split('/').slice(1);
+  }
 
   returnedPayload['path'] = pathAsArray;
   returnedPayload['query'] = apiQueryAsObject;

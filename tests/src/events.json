@@ -6,24 +6,24 @@
   },
   "events": {
     "GET": {
-      "/username/joule": [
+      "/": [
         {"Body":"message"},
         {"Body":""},
         {}
       ],
-      "/username/joule/myParam": [
+      "/myParam": [
         {}
       ],
-      "/username/joule?name1=value1&name2=value2": [
+      "/?name1=value1&name2=value2": [
         {}
       ]
     },
     "POST": {
-      "/username/joule": [
+      "/": [
         {"Body":"message"},
         {}
       ],
-      "/username/joule?name1=value1": [
+      "/?name1=value1": [
         {"Body":"message"}
       ]
     }
