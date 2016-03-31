@@ -16,6 +16,10 @@ var context = {
 
 var events;
 
+if(process.version != 'v0.10.36') {
+  console.log('WARN: Deployed Joules run using nodejs version v0.10.36. You are currently running ' + process.version + '.\n');
+}
+
 try {
   events = JSON.parse(fs.readFileSync(eventsFile, 'utf8'));
   if(!events) {
