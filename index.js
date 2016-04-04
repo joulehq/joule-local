@@ -9,6 +9,7 @@ var handlerFile = path.resolve(process.cwd() + '/index.js');
 var jouleFile = path.resolve(process.cwd() + '/../.joule.yml');
 var eventsFile = path.resolve(process.cwd() + '/events.json');
 
+var networkInterfaces = os.networkInterfaces();
 var ipAddress;
 for(var adpt in networkInterfaces) {
   var ifaces = networkInterfaces[adpt];
