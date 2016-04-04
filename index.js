@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+var os = require('os');
 var fs = require('fs');
 var path = require('path');
 var wait = require('wait.for');
@@ -7,6 +8,17 @@ var yaml = require('js-yaml');
 var handlerFile = path.resolve(process.cwd() + '/index.js');
 var jouleFile = path.resolve(process.cwd() + '/../.joule.yml');
 var eventsFile = path.resolve(process.cwd() + '/events.json');
+
+var ipAddress;
+for(var adpt in networkInterfaces) {
+  var ifaces = networkInterfaces[adpt];
+  for(var idx in ifaces) {
+    var iface = ifaces[idx];
+    if(iface.internal === false && iface.family === 'IPv4') {
+      ipAddress = iface.address;
+    }
+  }
+}
 
 var context = {
   succeed: function(input) {
@@ -56,7 +68,7 @@ var mapRequestIntoPayload = function(method, path, payload) {
       , apiQuery = ''
       , apiQueryAsObject = {}
       , pathAsArray
-      , returnedPayload = {httpMethod: method};
+      , returnedPayload = {httpMethod: method, remoteAddr: ipAddress};
 
   // check if path has a ?
   if(path.indexOf('?') === -1) {
